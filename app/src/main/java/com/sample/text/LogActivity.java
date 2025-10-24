@@ -53,9 +53,20 @@ public class LogActivity extends AppCompatActivity {
 
             }
         });
+        //Boton que redirecciona a activity registro
+        Button button2 = findViewById(R.id.btnRegistrarseLog);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LogActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
+
+    //metodo recibe Correo y contraseña y los revisa con firebaseAuth para iniciar sesion
     private void ingresar(String email, String password){
         oFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -64,13 +75,13 @@ public class LogActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Log.d(TAG, "SignInWithEmail:success");
                             FirebaseUser user = oFirebaseAuth.getCurrentUser();
-                            //updateUI(user);
+                            updateUI(user);
                             Intent intent = new Intent(LogActivity.this, HomeActivity.class);
 
                         }else{
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LogActivity.this, "Credenciales Incorrectas", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            updateUI(null);
 
                         }
                     }

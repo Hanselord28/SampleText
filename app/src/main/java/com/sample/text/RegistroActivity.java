@@ -59,7 +59,7 @@ public class RegistroActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = oFirebaseAuth.getCurrentUser();
         if(currentUser != null){
-            //reload();
+            reload();
         }
     }
 
@@ -79,14 +79,14 @@ public class RegistroActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Log.d(TAG, "CreateUserWithEmail:succes");
                             FirebaseUser user = oFirebaseAuth.getCurrentUser();
-                            //updateUI(user);
+                            updateUI(user);
                             Toast.makeText(RegistroActivity.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
                             onBackPressed();
                         }else{
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegistroActivity.this, "Fallo en la autenticacion", Toast.LENGTH_SHORT).show();
                             Toast.makeText(RegistroActivity.this, "Instroduzca correctamente sus datos", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            updateUI(null);
                             Correo1.requestFocus();
                         }
                     }
