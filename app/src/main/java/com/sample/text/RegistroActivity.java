@@ -13,8 +13,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import javax.annotation.Nonnull;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -26,6 +31,8 @@ public class RegistroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
 
         oFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
@@ -41,11 +48,55 @@ public class RegistroActivity extends AppCompatActivity {
         btnRegistrarseReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //crearRegistro();
+                crearRegistro();
             }
         });
+
+
     }
 
+    public void onStart(){
+        super.onStart();
+        FirebaseUser currentUser = oFirebaseAuth.getCurrentUser();
+        if(currentUser != null){
+            //reload();
+        }
+    }
+
+
+    private void reload(){
+
+    };
+
+
+    private void crearRegistro() {
+        EditText Correo1 = findViewById(R.id.txtCorreoReg);
+        EditText Contra1 = findViewById(R.id.txtContraReg);
+        oFirebaseAuth.createUserWithEmailAndPassword(String.valueOf(Correo1.getText()), String.valueOf(Contra1.getText()))
+                .addOnCompleteListener(RegistroActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@Nonnull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Log.d(TAG, "CreateUserWithEmail:succes");
+                            FirebaseUser user = oFirebaseAuth.getCurrentUser();
+                            //updateUI(user);
+                            Toast.makeText(RegistroActivity.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        }else{
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(RegistroActivity.this, "Fallo en la autenticacion", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistroActivity.this, "Instroduzca correctamente sus datos", Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                            Correo1.requestFocus();
+                        }
+                    }
+                });
+
+    }
+
+    private void updateUI(FirebaseUser user) {
+
+    }
 
 
 }
