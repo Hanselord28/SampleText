@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistroActivity">
+
+    <EditText
+        android:id="@+id/txtContraReg"
+        android:layout_width="320dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ingrese su Contraseña"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCorreoReg" />
+
+    <EditText
+        android:id="@+id/txtCorreoReg"
+        android:layout_width="320dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="272dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ingrese su Correo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnRegistrarseReg"
+        android:layout_width="228dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="48dp"
+        android:text="Registrarse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtContraReg" />
+</androidx.constraintlayout.widget.ConstraintLayout>
